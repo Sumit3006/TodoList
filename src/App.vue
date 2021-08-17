@@ -1,28 +1,62 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Todos v-bind:todos="todos" v-on:delete-todo="deleteTodo"/>
+    <AddTodo v-on:add-todo="addTodo"/>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Todos from './components/Todos';
+import AddTodo from './components/AddTodo';
 export default {
-  name: 'App',
+  name: 'app',
   components: {
-    HelloWorld
+    Todos,
+    AddTodo
+  },
+  data() {
+    return {
+      todos: [
+        {
+          id: 1,
+          title: 'Complete Vue',
+          completed: false
+        },
+        {
+          id: 2,
+          title: 'Complete Solidity',
+          completed: false
+        },
+        {
+          id: 3,
+          title: 'Learn Linear Regression',
+          completed: false
+        },
+        {
+          id: 4,
+          title: 'Learn ASP.NET',
+          completed: false
+        },
+        {
+          i: 5,
+          title: 'Complete project',
+          completed: false
+        }
+      ],
+    }
+  },
+  methods: {
+    addTodo(newTodoObj) {
+      this.todos = [...this.todos, newTodoObj];
+    },
+    deleteTodo(todoId) {
+      this.todos = this.todos.filter(todo => todo.id !== todoId);
+    }
   }
 }
 </script>
-
-<style>
+<style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background: rgb(229, 235, 205);
+  
 }
 </style>
